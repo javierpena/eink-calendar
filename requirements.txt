@@ -1,0 +1,6 @@
+caldav
+icalendar
+pygame
+pillow
+pyowm
+pytz

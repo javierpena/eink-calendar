@@ -1,0 +1,3 @@
+Weather Icons licensed under SIL OFL 1.1: http://scripts.sil.org/OFL.
+
+You can get the fonts at https://github.com/erikflowers/weather-icons

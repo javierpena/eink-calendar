@@ -1,0 +1,14 @@
+[Unit]
+Description=My cool e-ink family calendar
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/home/pi/launcher.sh
+PrivateTmp=false
+KillMode=control-group
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
