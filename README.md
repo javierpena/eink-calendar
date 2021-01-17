@@ -4,7 +4,8 @@
 I needed to have an updatable calendar to keep track of my children's school agenda,
 as well as some post-school activities. So instead of using a whiteboard, I thought
 it would be a nice holiday project to do it with a Raspberry Pi 2 and an e-ink
-screen.
+screen. I got some inspiration from [this similar project](https://github.com/zli117/EInk-Calendar)
+and went for it, and here's the result:
 
 <img src="https://raw.githubusercontent.com/javierpena/eink-calendar/main/img/calendar.jpg" width="600">
 
@@ -25,8 +26,8 @@ to check the GPIO pins you need to connect them to.
 The keypad will be connected to GPIO pins 29, 31, 33, 35 and 37. 
 
 ## Configuring
-Once the basic setup and connections are done (TODO: add diagram for GPIO connections),
-you will need to set up the `config.ini` file. This is the syntax:
+Once the basic setup and connections are done, you will need to set up the `config.ini` file. 
+This is its syntax:
 
 ```ini
 [DEFAULT]
@@ -45,7 +46,7 @@ password = password
 ```
 
 ### Driver configuration
-We have two different drivers to be used for both video output and keyboard input.
+We can use two different drivers to be used for both video output and keyboard input.
 This allows us to hack and tests locally without using the e-ink screen all the time.
 
 - For video, we can use `pygame` for the [Pygame](https://github.com/pygame/pygame)
@@ -55,19 +56,19 @@ This allows us to hack and tests locally without using the e-ink screen all the 
   (5, 6, 13, 19 and 26 if you use the BCM2835 pin notation).
 
 ### Open Weather Map API configuration
-You need to subscribe to the "Current Weather Data" API [link](https://openweathermap.org/api).
+You need to subscribe to the "Current Weather Data" [API](https://openweathermap.org/api).
 Note that you need to sign in as a user (it's free). Once you get the API key and the
 location id for your town, add them to the `owm_api_key` and `owm_location` keys in
 the configuration file.
 
 ### Calendar configuration
 You can use any CalDav link; in my case, I set up 3 calendars in a [Synology](https://www.synology.com)
-DiskStation. The code should adapt to any number of calendars, but keep in mind the
-resolution and font size ;).
+DiskStation using Synology Calenar. The code should adapt to any number of calendars,
+but keep in mind the resolution and font size.
 
-The `urls` parameter is a comma-separated list of CalDav urls. Since each of those
+The `urls` parameter is a comma-separated list of CalDav URLs. Since each of those
 calendars will correspond to an actual person, `names` will contain the list of
-names for each url. Make sure you spefify the same number of urls and names.
+names for each url. Make sure you spefify the same number of URLs and names.
 
 The `username` and `password` fields are self-explaining: include the user and
 password to access the calendars.
@@ -110,10 +111,10 @@ Bitstream Vera and Public Domain.
 
 The `epd7in5bc.py` and `epdconfig.py` files are taken from the [Waveshare e-Paper repository](https://github.com/waveshare/e-Paper/),
 including patches inspired by [this pull request](https://github.com/waveshare/e-Paper/pull/104)
-to improve performance.
+to improve screen refresh performance.
 
 ## Anything missing?
-Feel free to contact me. This project was mainly set to scratch a personal itch,
+Feel free to contact me. This project was mainly created to scratch a personal itch,
 but if it can be helpful to anyone, I'd be more than happy to improve it and
 its documentation.
 
