@@ -6,6 +6,8 @@ as well as some post-school activities. So instead of using a whiteboard, I thou
 it would be a nice holiday project to do it with a Raspberry Pi 2 and an e-ink
 screen.
 
+<img src="https://raw.githubusercontent.com/javierpena/eink-calendar/main/img/calendar.jpg" width="600">
+
 ## What do you need
 - A Raspberry Pi (any model would do, I did it with a Pi 2), with the Raspberry Pi OS.
 - Eink display: [640x384, 7.5inch E-Ink display HAT for Raspberry Pi, yellow/black/white three-color](https://www.waveshare.com/product/displays/e-paper/epaper-1/7.5inch-e-paper-hat-c.htm).
@@ -14,6 +16,13 @@ screen.
 - A photo frame to house the setup. I bought one at a local shop, just make sure it has
   enough depth to host all the hardware.
 - One or more Caldav calendars to display.
+
+By default, the e-ink display includes a hat to connect it directly on top of the GPIO
+connectors. However, since we want to connect the keypad too, we need to use the cables
+directly. Refer to [the vendor notes](https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT_(B))
+to check the GPIO pins you need to connect them to.
+
+The keypad will be connected to GPIO pins 29, 31, 33, 35 and 37. 
 
 ## Configuring
 Once the basic setup and connections are done (TODO: add diagram for GPIO connections),
@@ -42,7 +51,8 @@ This allows us to hack and tests locally without using the e-ink screen all the 
 - For video, we can use `pygame` for the [Pygame](https://github.com/pygame/pygame)
   driver, or `eink` to use the e-ink screen.
 - For keyboard input, we can use `pygame` to get input from your computer's keyboard,
-  or `gpio` to use the 1x4 keypad connected to the GPIO pins 29 ,31, 33, 35 and 37.
+  or `gpio` to use the 1x4 keypad connected to the GPIO pins 29, 31, 33, 35 and 37
+  (5, 6, 13, 19 and 26 if you use the BCM2835 pin notation).
 
 ### Open Weather Map API configuration
 You need to subscribe to the "Current Weather Data" API [link](https://openweathermap.org/api).
