@@ -10,11 +10,15 @@ class WeatherWidget():
         self.owm = OWM(api_key)
 
     def get_weather(self, location):
-        mgr = self.owm.weather_manager()
-        current = mgr.weather_at_id(location)
-        w = current.weather
-        temp = w.temperature('celsius')['temp']
-        wcode = w.weather_code
+        try:
+            mgr = self.owm.weather_manager()
+            current = mgr.weather_at_id(location)
+            w = current.weather
+            temp = w.temperature('celsius')['temp']
+            wcode = w.weather_code
+        except Exception:
+            wcode = 900 # tornado
+            temp = -273.0
         img = Image.new('1', (128, 64), color=255)
         imgdraw = ImageDraw.Draw(img)
         imgdraw.text((0, 0), self.wcode_to_unicode[wcode], font=self.weatherfont, fill=0)

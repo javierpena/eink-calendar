@@ -138,7 +138,7 @@ try:
                 refresh = True
             else:
                 current_time = datetime.now()
-                if current_time.hour > 20 or current_time.hour < 7:
+                if current_time.hour > 21 or current_time.hour < 7:
                     current_screen = 4
                 else:
                     current_screen = 0

@@ -63,13 +63,13 @@ class CalendarWidget():
         # Draw Calendar lines
         for i in range(0, 14):
             imgdraw2.line([(0,30 + 20*i), (639, 30 + 20*i)], fill=0, width=1)
-        for i in range(0, 13):
+        for i in range(0, 14):
             imgdraw.text((0, 30 + 20*i), '%2d:00' % (i+8), font=self.font14, fill=0)
 
         column_number = 0
         for column_list in column_events:
             for event in column_list:
-                if event['event_start'].hour >= 8 or event['event_start'].hour <= 19:
+                if event['event_start'].hour >= 8 and event['event_start'].hour <= 21:
                     eventimg = self.create_entry_box(event['event_start'],
                                                      event['event_end'],
                                                      event['event_title'],
