@@ -39,7 +39,7 @@ owm_api_key = <insert API key here>
 owm_location = <insert location id here>
 
 [calendar]
-urls = http://example.com/caldavcal1, http://example.com/caldavcal2, http://example.com/caldavcal3
+urls = http://example.com/caldavcal1, http://example.com/caldavcal2, http://example.com/ical3.ics
 names = user1, user2, user3
 username = user
 password = password
@@ -62,19 +62,24 @@ location id for your town, add them to the `owm_api_key` and `owm_location` keys
 the configuration file.
 
 ### Calendar configuration
-You can use any CalDav link; in my case, I set up 3 calendars in a [Synology](https://www.synology.com)
-DiskStation using Synology Calenar. The code should adapt to any number of calendars,
+You can use any CalDav or iCal link; in my case, I set up 3 calendars in a [Synology](https://www.synology.com)
+DiskStation using Synology Calendar. The code should adapt to any number of calendars,
 but keep in mind the resolution and font size.
 
-The `urls` parameter is a comma-separated list of CalDav URLs. Since each of those
-calendars will correspond to an actual person, `names` will contain the list of
-names for each url. Make sure you spefify the same number of URLs and names.
+The `urls` parameter is a comma-separated list of CalDav or iCal URLs. Currently,
+iCal URLs are identified by a trailing `.ics` in the calendar URL. This may be
+improved in the future.
+
+Since each of those calendars will correspond to an actual person, `names` will
+contain the list of names for each url. Make sure you spefify the same number
+of URLs and names.
 
 The `username` and `password` fields are self-explaining: include the user and
-password to access the calendars.
+password to access the calendars, only for CalDav URLs.
 
 If you want to use a different type of calendar, such as Google Calendar, you
-will need to create a new driver. Patches are welcome :).
+will need to create a new driver. However, it is possible to export a read-only,
+secret address for your Google Calendar following [this guide](https://support.google.com/calendar/answer/37648?hl=en#zippy=%2Cget-your-calendar-view-only).
 
 ## Running
 The scripts directory contains a simple launcher script using a virtual environment,

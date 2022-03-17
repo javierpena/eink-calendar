@@ -9,6 +9,7 @@ import sys
 import time
 
 from drivers.caldavprovider import CalDavProvider
+from drivers.icalprovider import ICalProvider
 from widgets.calendarwidget import CalendarWidget
 from widgets.timewidget import TimeWidget
 from widgets.weatherwidget import WeatherWidget
@@ -22,13 +23,18 @@ def today_calendar():
     fullimg.paste(timewidget.get_time(), box=(128, 0))
     calendar = CalendarWidget(family_names)
     event_getter = CalDavProvider(calendar_username, calendar_password)
+    ical_event_getter = ICalProvider()
     test_event_list = []
 
     today_start = datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
     today_end = today_start.replace(hour=21, minute=0, second=0, microsecond=0)
 
     for url in calendar_list:
-        test_event_list.append(event_getter.get_calendar(url, today_start, today_end))
+        if url.endswith('.ics'):
+            # This is an iCal URL
+            test_event_list.append(ical_event_getter.get_calendar(url, today_start, today_end))
+        else:
+            test_event_list.append(event_getter.get_calendar(url, today_start, today_end))
     img1, img2 = calendar.get_calendar(test_event_list)
     fullimg.paste(img1, box=(0, 80))
     fullimg2.paste(img2, box=(0, 80))
@@ -42,6 +48,7 @@ def week_calendar(calid, name):
     timewidget = TimeWidget()
     fullimg.paste(timewidget.get_time(), box=(128, 0))
     event_getter = CalDavProvider(calendar_username, calendar_password)
+    ical_event_getter = ICalProvider()
     test_event_list = []
 
     today = datetime.today()
@@ -49,7 +56,12 @@ def week_calendar(calid, name):
     curdate = curdate.replace(hour=8, minute=0, second=0, microsecond=0)
 
     for day in range(7, 12):
-        test_event_list.append(event_getter.get_calendar(calendar_list[calid], curdate, curdate.replace(hour=21)))
+        if calendar_list[calid].endswith('.ics'):
+            # iCal calendar
+            test_event_list.append(ical_event_getter.get_calendar(calendar_list[calid], curdate, curdate.replace(hour=21)))
+        else:
+            # CalDAV
+            test_event_list.append(event_getter.get_calendar(calendar_list[calid], curdate, curdate.replace(hour=21)))
         curdate = curdate + timedelta(days=1)
 
     calendar = CalendarWidget(['L', 'M', 'X', 'J', 'V'])
