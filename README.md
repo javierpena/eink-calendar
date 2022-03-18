@@ -81,6 +81,11 @@ If you want to use a different type of calendar, such as Google Calendar, you
 will need to create a new driver. However, it is possible to export a read-only,
 secret address for your Google Calendar following [this guide](https://support.google.com/calendar/answer/37648?hl=en#zippy=%2Cget-your-calendar-view-only).
 
+Note that the library used for iCal support, [icalevents](https://pypi.org/project/icalevents/) has a bug in version 0.1.25
+that may prevent events from being properly loaded. This was fixed by [this commit](https://github.com/jazzband/icalevents/pull/70),
+so you will need to update to version 0.1.26 or later. As of this writing, version 0.1.26
+is not available on PyPi.
+
 ## Running
 The scripts directory contains a simple launcher script using a virtual environment,
 and a systemd unit file you can use to ensure the program runs on startup.
